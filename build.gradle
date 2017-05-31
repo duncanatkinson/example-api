@@ -1,59 +1,45 @@
 buildscript {
-	ext {
-		springBootVersion = '1.0.0.BUILD-SNAPSHOT'
-	}
-	repositories {
-		// NOTE: You should declare only repositories that you need here
-		mavenLocal()
-		mavenCentral()
-		maven { url "http://repo.spring.io/release" }
-		maven { url "http://repo.spring.io/milestone" }
-		maven { url "http://repo.spring.io/snapshot" }
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+    }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'docker'
 
 jar {
-	baseName = 'spring-boot-sample-actuator'
-	version =  '0.0.0'
+    baseName = 'example-api'
+}
+
+task buildDocker(type: Docker, dependsOn: build) {
+    push = true
+    applicationName = 'greennut/' + jar.baseName
+    dockerfile = file('src/main/docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
 }
 
 repositories {
-	// NOTE: You should declare only repositories that you need here
-	mavenLocal()
-	mavenCentral()
-	maven { url "http://repo.spring.io/release" }
-	maven { url "http://repo.spring.io/milestone" }
-	maven { url "http://repo.spring.io/snapshot" }
+    mavenCentral()
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 dependencies {
-	configurations {
-		insecure.exclude module: 'spring-boot-starter-security'
-	}
-
-	compile("org.springframework.boot:spring-boot-starter-actuator")
-	compile("org.springframework.boot:spring-boot-starter-security")
-	compile("org.springframework.boot:spring-boot-starter-web")
-
-	testCompile("org.springframework.boot:spring-boot-starter-test")
-
-	insecure configurations.runtime
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-actuator")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('com.jayway.jsonpath:json-path')
 }
 
-// Slightly odd requirement (package a jar file as an insecure app, exlcuding Spring Security)
-// just to demonstrate the "customConfiguration" feature of the Boot gradle plugin.
-springBoot {
-	customConfiguration = "insecure"
-}
-
-task wrapper(type: Wrapper) {
-	gradleVersion = '1.6'
-}
