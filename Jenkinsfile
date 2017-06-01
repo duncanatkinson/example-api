@@ -8,8 +8,17 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'echo $PATH'
-        sh 'gradle tasks'
+        parallel(
+          "Build": {
+            sh 'echo $PATH'
+            sh 'gradle tasks'
+            
+          },
+          "message": {
+            echo 'Hello World'
+            
+          }
+        )
       }
     }
   }
