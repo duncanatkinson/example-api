@@ -17,16 +17,25 @@ jar {
     baseName = 'example-api'
 }
 
-task buildDocker(type: Docker, dependsOn: build) {
-    push = true
+docker {
+    baseImage "frolvlad/alpine-oraclejdk8:slim"
+}
+
+
+task buildDocker(type: Docker, dependsOn: build, description: 'Build docker image') {
+    push = false
     applicationName = 'greennut/' + jar.baseName
-    dockerfile = file('src/main/docker/Dockerfile')
     doFirst {
         copy {
             from jar
             into stageDir
         }
     }
+    addFile 'example-api.jar'
+    setEnvironment("JAVA_OPTS", "-Djava.security.egd=file:/dev/./urandom -jar")
+    entryPoint([
+            'sh', '-c', 'java -jar \${JAVA_OPTS} example-api.jar'
+    ])
 }
 
 repositories {
