@@ -9,6 +9,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'echo $PATH'
+        sh 'gradle tasks'
       }
     }
   }
