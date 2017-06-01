@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'gradle buildDocker'
+        sh 'echo $PATH'
       }
     }
   }
