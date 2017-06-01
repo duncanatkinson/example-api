@@ -33,5 +33,15 @@ pipeline {
         sh 'gradle test'
       }
     }
+    stage('Manual Checks') {
+      steps {
+        input(message: 'Please confirm that it all looks good', ok: 'not sure what this is', submitter: 'duncan')
+      }
+    }
+    stage('deploy') {
+      steps {
+        echo 'do deployment'
+      }
+    }
   }
 }
