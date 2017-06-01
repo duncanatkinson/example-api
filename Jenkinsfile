@@ -30,12 +30,16 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'gradle test'
-      }
-    }
-    stage('Manual Checks') {
-      steps {
-        input(message: 'Please confirm that it all looks good', ok: 'Looks good', submitter: 'duncan')
+        parallel(
+          "Test": {
+            sh 'gradle test'
+            
+          },
+          "Manual Checks": {
+            input(message: 'Please perform a manual check', id: 'manualCheck', ok: 'looks pretty sweet', submitter: 'duncan')
+            
+          }
+        )
       }
     }
     stage('deploy') {
