@@ -10,12 +10,19 @@ pipeline {
       steps {
         parallel(
           "Build": {
-            sh 'echo $PATH'
             sh 'gradle dockerBuild'
             
           },
           "message": {
             echo 'Hello World'
+            
+          },
+          "echo path": {
+            sh 'echo $PATH'
+            
+          },
+          "list available tasks": {
+            sh 'gradle tasks -a'
             
           }
         )
