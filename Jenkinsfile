@@ -3,7 +3,9 @@ pipeline {
     node {
       label 'gradle'
     }
-    
+  }
+  triggers {
+  	pollSCM('H * * * * *')
   }
   stages {
     stage('Build') {
@@ -11,19 +13,19 @@ pipeline {
         parallel(
           "Build": {
             sh 'gradle buildDocker'
-            
+
           },
           "message": {
             echo 'Hello World'
-            
+
           },
           "echo path": {
             sh 'echo $PATH'
-            
+
           },
           "list available tasks": {
             sh 'gradle tasks --all'
-            
+
           }
         )
       }
@@ -33,11 +35,11 @@ pipeline {
         parallel(
           "Test": {
             sh 'gradle test'
-            
+
           },
           "Manual Checks": {
             input(message: 'Please perform a manual check', id: 'manualCheck', ok: 'looks pretty sweet', submitter: 'duncan')
-            
+
           }
         )
       }
