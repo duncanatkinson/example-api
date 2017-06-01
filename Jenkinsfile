@@ -10,7 +10,7 @@ pipeline {
       steps {
         parallel(
           "Build": {
-            sh 'gradle dockerBuild'
+            sh 'gradle buildDocker'
             
           },
           "message": {
@@ -22,7 +22,7 @@ pipeline {
             
           },
           "list available tasks": {
-            sh 'gradle tasks -a'
+            sh 'gradle tasks --all'
             
           }
         )
