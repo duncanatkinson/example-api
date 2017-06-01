@@ -11,7 +11,7 @@ pipeline {
         parallel(
           "Build": {
             sh 'echo $PATH'
-            sh 'gradle tasks'
+            sh 'gradle dockerBuild'
             
           },
           "message": {
