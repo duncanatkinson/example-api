@@ -35,7 +35,7 @@ pipeline {
     }
     stage('Manual Checks') {
       steps {
-        input(message: 'Please confirm that it all looks good', ok: 'not sure what this is', submitter: 'duncan')
+        input(message: 'Please confirm that it all looks good', ok: 'Looks good', submitter: 'duncan')
       }
     }
     stage('deploy') {
