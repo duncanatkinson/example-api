@@ -16,6 +16,7 @@ apply plugin: 'docker'
 
 jar {
     baseName = 'example-api'
+    version = '1.0.0-SNAPSHOT'
 }
 
 docker {
