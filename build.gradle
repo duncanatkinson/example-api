@@ -27,6 +27,7 @@ docker {
 task buildDocker(type: Docker, dependsOn: build, description: 'Build docker image') {
     push = true
     applicationName = 'greennut/' + jar.baseName
+    tagVersion = jar.version
     doFirst {
         copy {
             from jar
