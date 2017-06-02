@@ -37,7 +37,7 @@ task buildDocker(type: Docker, dependsOn: build, description: 'Build docker imag
     addFile 'example-api.jar'
     setEnvironment("JAVA_OPTS", "-Djava.security.egd=file:/dev/./urandom -jar")
     entryPoint([
-            'sh', '-c', 'java -jar \${JAVA_OPTS} example-api.jar'
+            'sh', '-c', 'java -jar \${JAVA_OPTS} example-api-1.0.0-SNAPSHOT.jar'
     ])
 }
 

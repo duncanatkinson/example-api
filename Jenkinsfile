@@ -12,7 +12,7 @@ pipeline {
       steps {
         parallel(
           "Build": {
-            sh 'gradle buildDocker --debug'
+            sh 'gradle clean buildDocker'
 
           },
           "message": {
