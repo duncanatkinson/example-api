@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
@@ -23,7 +24,7 @@ docker {
 
 
 task buildDocker(type: Docker, dependsOn: build, description: 'Build docker image') {
-    push = false
+    push = true
     applicationName = 'greennut/' + jar.baseName
     doFirst {
         copy {
