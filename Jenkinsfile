@@ -46,7 +46,7 @@ pipeline {
     }
     stage('deploy') {
       steps {
-        echo 'do deployment'
+        kubectl replace -f deployment.yml
       }
     }
   }
