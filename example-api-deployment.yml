@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1 # for versions before 1.6.0 use extensions/v1beta1
 kind: Deployment
 metadata:
-  name: example-api-deployment
+  name: example-api
 spec:
   replicas: 3
   template:

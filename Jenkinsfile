@@ -46,7 +46,9 @@ pipeline {
     }
     stage('deploy') {
       steps {
-        sh 'kubectl replace -f deployment.yml'
+        echo 'either creating new deployment or replacing existing deployment'
+        sh 'kubectl apply -f example-api-deployment.yml'
+	sh 'kubectl apply -f example-api-service.yml'
       }
     }
   }
