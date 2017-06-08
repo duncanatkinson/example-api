@@ -4,6 +4,7 @@ resources:
     source:
       uri: git@github.com:duncanatkinson/example-api.git
       branch: master
+      private_key: {{github-private-key}}
 
 jobs:
   - name: build-example-api
