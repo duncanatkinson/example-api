@@ -14,6 +14,5 @@ outputs:
 
 run:
   path: ./script.sh
-  user: root
   dir: example-api
 
