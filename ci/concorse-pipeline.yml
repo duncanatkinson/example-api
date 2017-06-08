@@ -12,4 +12,4 @@ jobs:
       - get: example-api
         trigger: true
       - task: unit
-        file: example-api/ci/concordian-unit-task.yml
+        file: ci/concordian-unit-task.yml
