@@ -1,12 +1,5 @@
 platform: linux
 
-resources:
-  - name: example-api
-    type: git
-    source:
-      uri: git@github.com:duncanatkinson/example-api.git
-      branch: master
-
 image_resource:
   type: docker-image
   source:
