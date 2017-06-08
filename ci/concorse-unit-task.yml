@@ -1,0 +1,26 @@
+platform: linux
+
+resources:
+  - name: example-api
+    type: git
+    source:
+      uri: git@github.com:duncanatkinson/example-api.git
+      branch: master
+
+image_resource:
+  type: docker-image
+  source:
+    repository: gradle
+    tag: alpine
+
+inputs:
+- name: example-api
+
+outputs:
+- name: build
+
+run:
+  path: ./script.sh
+  user: root
+  dir: example-api
+

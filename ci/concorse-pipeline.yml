@@ -1,0 +1,14 @@
+resources:
+  - name: example-api
+    type: git
+    source:
+      uri: git@github.com:duncanatkinson/example-api.git
+      branch: master
+
+jobs:
+  - name: build-example-api
+    plan:
+      - get: example-api
+        trigger: true
+      - task: unit
+        file: example-api/ci/concordian-unit-task.yml
