@@ -38,7 +38,7 @@ jobs:
   - name: build-example-api
     plan:
       - get: version
-        params: {bump: patch}
+        params: { pre: rc }
       - get: example-api
         trigger: true
       - task: build & unit test
