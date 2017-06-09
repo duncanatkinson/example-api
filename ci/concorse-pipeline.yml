@@ -18,20 +18,20 @@ resources:
       file: version
       private_key: {{github-private-key}}
 
-  - name: example-api
+  - name: source
     type: git
     source:
       uri: git@github.com:duncanatkinson/example-api.git
       branch: master
       private_key: {{github-private-key}}
 
-  - name: example-api-release
+  - name: release
     type: maven-resource
     source:
-      url: http://10.34.64.122:8081/nexus/content/repositories
+      url: http://nexus.nt.ad.local:8081/nexus/content/repositories/releases
       artifact: example.nationaltrust:example-api:jar
-      username: admin
-      password: admin123
+      username: deployment
+      password: {{nexus-deployment-password}}
       disable_redeploy: true
 
 jobs:
@@ -41,11 +41,11 @@ jobs:
         params:
           pre: rc
           file: version
-      - get: example-api
+      - get: source
         trigger: true
       - task: build & unit test
-        file: example-api/ci/build.yml
-      - put: example-api-release
+        file: source/ci/build.yml
+      - put: release
         params:
           file: build/libs/example-api.jar
           version_file: version/version
