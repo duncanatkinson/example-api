@@ -16,6 +16,9 @@ run:
   user: root
   path: gradle
   args:
-    - -b example-api/build.gradle
+    - --build-file
+    - example-api/build.gradle
     - buildInParent
+    - --stacktrace
+    - --debug
 
