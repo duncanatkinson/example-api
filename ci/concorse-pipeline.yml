@@ -42,7 +42,7 @@ jobs:
       - get: example-api
         trigger: true
       - task: build & unit test
-        file: example-api/ci/concorse-unit-task.yml
+        file: example-api/ci/concorse-test.yml
       - put: example-api-release
         params:
           file: example-api/build/libs/example-api.jar

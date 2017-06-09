@@ -1,0 +1,18 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: gradle
+    tag: alpine
+
+inputs:
+- name: example-api
+
+outputs:
+- name: build
+
+run:
+  user: root
+  path: ./example-api/script.sh
+

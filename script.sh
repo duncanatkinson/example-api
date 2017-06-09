@@ -2,6 +2,9 @@
 
 echo $USER
 
-ls -lart 
+ls -lart
 
-gradle tasks --debug --stacktrace
+cat version/version
+ls example-api
+touch example-api/build/libs/example-api.jar
+ls example-api/build/libs
