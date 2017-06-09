@@ -20,6 +20,4 @@ run:
     - example-api/build.gradle
     - build
     - -PbuildDir=../build
-    - --stacktrace
-    - --debug
 

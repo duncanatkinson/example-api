@@ -28,7 +28,7 @@ resources:
   - name: example-api-release
     type: maven-resource
     source:
-      url: http://10.34.64.218/nexus/content/repositories/releases
+      url: http://10.34.64.122:8081/nexus/content/repositories
       artifact: example.nationaltrust:example-api:jar
       username: admin
       password: admin123
@@ -44,7 +44,7 @@ jobs:
       - get: example-api
         trigger: true
       - task: build & unit test
-        file: example-api/ci/build.yml
+        file: example-api/ci/test.yml
       - put: example-api-release
         params:
           file: build/libs/example-api.jar
