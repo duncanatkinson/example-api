@@ -46,6 +46,5 @@ jobs:
         file: example-api/ci/concorse-unit-task.yml
       - put: maven-release
         params:
-          file: example-api/build/lib/*.jar
-          pom_file: example-api/pom.xml
+          file: example-api/build/lib/example-api.jar
           version_file: version/version
