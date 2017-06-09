@@ -37,7 +37,7 @@ resources:
 jobs:
   - name: build-example-api
     plan:
-      - put: version
+      - get: version
         params: {bump: patch}
       - get: example-api
         trigger: true
@@ -47,3 +47,4 @@ jobs:
         params:
           file: example-api/build/libs/example-api.jar
           version_file: version/version
+      - put: version
