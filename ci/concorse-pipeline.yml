@@ -25,12 +25,11 @@ resources:
       branch: master
       private_key: {{github-private-key}}
 
-  - name: maven-release
+  - name: example-api-release
     type: maven-resource
     source:
-      url: https://10.34.64.218/repository/releases
-      snapshot_url: https://10.34.64.218:8081/repository/snapshots
-      artifact: example.nationaltrust:example-webapp:jar
+      url: http://10.34.64.218/nexus/content/repositories/releases
+      artifact: example.nationaltrust:example-api:jar
       username: admin
       password: admin123
       disable_redeploy: true
@@ -42,9 +41,9 @@ jobs:
         params: {bump: patch}
       - get: example-api
         trigger: true
-      - task: unit
+      - task: build & unit test
         file: example-api/ci/concorse-unit-task.yml
-      - put: maven-release
+      - put: example-api-release
         params:
-          file: example-api/build/lib/example-api.jar
+          file: example-api/build/libs/example-api.jar
           version_file: version/version
