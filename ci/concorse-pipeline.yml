@@ -1,3 +1,12 @@
+resource_types:
+
+# maven resource to allow us to write to maven repo such as sonatype/nexus
+- name: maven-resource
+  type: docker-image
+  source:
+    repository: pivotalpa/maven-resource
+    tag: v1.3.3
+
 resources:
   - name: example-api
     type: git
@@ -6,6 +15,16 @@ resources:
       branch: master
       private_key: {{github-private-key}}
 
+  - name: maven-release
+    type: maven-resource
+    source:
+      url: https://10.34.64.218:8081/repository/releases
+      snapshot_url: https://10.34.64.218:8081/repository/snapshots
+      artifact: example.nationaltrust:example-webapp:jar
+      username: admin
+      password: admin123
+      disable_redeploy: true
+
 jobs:
   - name: build-example-api
     plan:
@@ -13,3 +32,8 @@ jobs:
         trigger: true
       - task: unit
         file: example-api/ci/concorse-unit-task.yml
+      - put: maven-release
+        params:
+          file: build/lib/*.jar
+          pom_file: example-api/pom.xml
+          version_file: example-api/version
