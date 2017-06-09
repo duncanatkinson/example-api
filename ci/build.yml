@@ -10,11 +10,11 @@ inputs:
 - name: example-api
 
 outputs:
-- name: example-api/build
+- name: build
 
 run:
   user: root
   path: gradle
   args:
-    - buildConcourse
+    - buildInParent
 

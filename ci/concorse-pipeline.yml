@@ -47,5 +47,5 @@ jobs:
         file: example-api/ci/build.yml
       - put: example-api-release
         params:
-          file: example-api/build/libs/example-api.jar
+          file: build/libs/example-api.jar
           version_file: version/version
