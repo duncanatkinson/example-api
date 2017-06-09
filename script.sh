@@ -2,7 +2,7 @@
 
 echo $USER
 
-mkdir -p example-api/build/libs/
+mkdir -p build/libs/
 touch build/libs/example-api.jar
 
 echo contents of example-api
