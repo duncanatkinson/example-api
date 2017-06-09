@@ -16,5 +16,6 @@ run:
   user: root
   path: gradle
   args:
+    - -b example-api/build.gradle
     - buildInParent
 
