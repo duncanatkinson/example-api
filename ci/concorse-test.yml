@@ -8,6 +8,7 @@ image_resource:
 
 inputs:
 - name: example-api
+- name: version
 
 outputs:
 - name: build
