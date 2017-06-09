@@ -40,6 +40,10 @@ task buildDocker(type: Docker, dependsOn: build, description: 'Build docker imag
     ])
 }
 
+task buildConcourse(dependsOn:build, description: 'Build but set build directory in parent so can be a concourse output'){
+    buildDir = '/../build'
+}
+
 repositories {
     mavenCentral()
 }

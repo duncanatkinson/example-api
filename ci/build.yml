@@ -14,8 +14,7 @@ outputs:
 
 run:
   user: root
-  dir: example-api
   path: gradle
   args:
-    - build
+    - buildConcourse
 
