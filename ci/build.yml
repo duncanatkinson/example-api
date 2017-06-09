@@ -10,7 +10,7 @@ inputs:
 - name: example-api
 
 outputs:
-- name: build
+- name: example-api/build
 
 run:
   user: root
