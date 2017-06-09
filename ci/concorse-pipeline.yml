@@ -37,8 +37,10 @@ resources:
 jobs:
   - name: build-example-api
     plan:
-      - put: version
-        params: {file: version/version}
+      - get: version
+        params:
+          pre: rc
+          file: version
       - get: example-api
         trigger: true
       - task: build & unit test
