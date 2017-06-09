@@ -18,7 +18,8 @@ run:
   args:
     - --build-file
     - example-api/build.gradle
-    - buildInParent
+    - build
+    - -PbuildDir=../build
     - --stacktrace
     - --debug
 
