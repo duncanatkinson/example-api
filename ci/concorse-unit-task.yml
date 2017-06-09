@@ -17,5 +17,5 @@ run:
   dir: example-api
   path: gradle
   args:
-    - buildDocker
+    - build
 
