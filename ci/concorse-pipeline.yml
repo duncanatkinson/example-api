@@ -8,6 +8,16 @@ resource_types:
     tag: v1.3.3
 
 resources:
+
+  - name: version
+    type: semver
+    source:
+      driver: git
+      uri: git@github.com:duncanatkinson/example-api.git
+      branch: version
+      file: version
+      private_key: {{github-private-key}}
+
   - name: example-api
     type: git
     source:
@@ -28,6 +38,8 @@ resources:
 jobs:
   - name: build-example-api
     plan:
+      - get: version
+        params: {bump: minor}
       - get: example-api
         trigger: true
       - task: unit
@@ -37,3 +49,5 @@ jobs:
           file: build/lib/*.jar
           pom_file: example-api/pom.xml
           version_file: example-api/version
+      - put: version
+        params: {file: example-api/version}
