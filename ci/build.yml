@@ -19,5 +19,5 @@ run:
     - -PbuildDir=../build
     - --build-file
     - source/build.gradle
-    - buildDocker
+    - build
 
